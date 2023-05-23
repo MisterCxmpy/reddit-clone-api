@@ -14,11 +14,9 @@ class User {
     static async create(data) {
         const { email, username, password } = data;
 
-        // generate hashed password
         const salt = await genSalt();
         const hashed = await hash(password, salt);
 
-        // insert user into db
         const response = await db.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *;', [username, email, hashed])
         if (!response.rowCount) throw new Error('User Creation Error')
 

@@ -9,7 +9,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
-app.use('/api', require('./routes/api.route'));
+app.use('/', require('./routes/api.route'));
 
 app.use((req, res, next) => {
   next(createError.NotFound());

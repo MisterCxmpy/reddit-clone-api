@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS posts CASCADE;
 
 CREATE TABLE users (
   user_id INT GENERATED ALWAYS AS IDENTITY,
@@ -8,4 +9,18 @@ CREATE TABLE users (
   created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   is_admin BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (user_id)
+);
+
+CREATE TABLE posts (
+  post_id INT GENERATED ALWAYS AS IDENTITY,
+  community VARCHAR(140) NOT NULL,
+  author VARCHAR(60) NOT NULL,
+  created_at timestamp DEFAULT CURRENT_TIMESTAMP,
+  content TEXT NOT NULL,
+  upvotes INT DEFAULT 0,
+  downvotes INT DEFAULT 0,
+  comments INT DEFAULT 0,
+  user_id INT,
+  PRIMARY KEY (post_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
