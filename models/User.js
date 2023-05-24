@@ -2,12 +2,13 @@ const { genSalt, hash, compare } = require('bcrypt');
 const db = require('../config/postgresdb.js');
 
 class User {
-    constructor({ user_id, username, email, password, created_at, is_admin }) {
+    constructor({ user_id, username, email, password, created_at, score, is_admin }) {
         this.user_id = user_id;
         this.email = email;
         this.username = username;
         this.password = password;
         this.created_at = created_at;
+        this.score = score;
         this.is_admin = is_admin;
     }
 
