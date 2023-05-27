@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controller = require('../controllers/community.controller.js')
 
-router.get("/:id", controller.getCommunityById)
+router.get("/:community", controller.getCommunityByCommunity)
 router.get("/", controller.getAll)
 router.post("/create", controller.createPost)
 

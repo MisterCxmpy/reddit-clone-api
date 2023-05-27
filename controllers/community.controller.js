@@ -11,12 +11,12 @@ module.exports.createPost = async (req, res, next) => {
   }
 };
 
-module.exports.getCommunityById = async (req, res, next) => {
-  const { id } = req.params;
+module.exports.getCommunityByCommunity = async (req, res, next) => {
+  const { community } = req.params;
 
   try {
-    const community = await Community.getById(id);
-    res.json({ community });
+    const community_info = await Community.getByCommunity(community);
+    res.json(community_info);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

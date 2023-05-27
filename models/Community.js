@@ -57,9 +57,9 @@ class Community {
     return response.rows.map((c) => new Community(c));
 }
 
-  static async getById(community_id) {
-    const query = 'SELECT * FROM communities WHERE community_id = $1';
-    const values = [community_id];
+  static async getByCommunity(community) {
+    const query = 'SELECT * FROM communities WHERE community_name = $1';
+    const values = [community];
 
     try {
       const { rows } = await db.query(query, values);
