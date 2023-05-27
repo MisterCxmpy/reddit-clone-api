@@ -18,7 +18,8 @@ CREATE TABLE posts (
   community VARCHAR(140) NOT NULL,
   author VARCHAR(60) NOT NULL,
   created_at timestamp DEFAULT CURRENT_TIMESTAMP,
-  content TEXT NOT NULL,
+  title TEXT NOT NULL,
+  content TEXT,
   upvotes INT DEFAULT 0,
   downvotes INT DEFAULT 0,
   comments INT DEFAULT 0,
@@ -29,10 +30,11 @@ CREATE TABLE posts (
 
 CREATE TABLE communities (
   community_id INT GENERATED ALWAYS AS IDENTITY,
-  community_name VARCHAR(140) NOT NULL,
+  community_name VARCHAR(140) NOT NULL UNIQUE,
   community_summary TEXT NOT NULL,
   community_rules TEXT NOT NULL,
   community_image TEXT NOT NULL,
+  community_leader VARCHAR(60) NOT NULL,
   is_default BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (community_id)
 );
@@ -43,6 +45,7 @@ INSERT INTO
     community_summary,
     community_rules,
     community_image,
+    community_leader,
     is_default
   )
 VALUES
@@ -53,5 +56,6 @@ VALUES
 The community''s front page showcases a curated selection of popular posts from a multitude of categories, including technology, science, current events, art, sports, gaming, music, movies, TV shows, and much more. Users can easily find content that aligns with their interests, engage in lively conversations, and discover fascinating perspectives from around the world.',
     '[''Behave like you would in real life'', ''Search for duplicates before posting'', ''Look for the original source of content'', ''Search for duplicates before posting'', ''Read the community''s rules'']',
     'https://w0.peakpx.com/wallpaper/789/352/HD-wallpaper-sugar-pop-art-graffiti-stickers-colorful.jpg',
+    'awesomegamer123',
     'true'
   )

@@ -1,18 +1,19 @@
 const db = require('../config/postgresdb.js');
 
 class Community {
-  constructor({ community_id, community_name, community_summary, community_rules, community_image, is_default }) {
+  constructor({ community_id, community_name, community_summary, community_rules, community_image, community_leader, is_default }) {
     this.community_id = community_id;
     this.community_name = community_name;
     this.community_summary = community_summary;
     this.community_rules = community_rules;
     this.community_image = community_image;
+    this.community_leader = community_leader;
     this.is_default = is_default;
   }
 
-  static async create(community_name, community_summary, community_rules, community_image) {
-    const query = 'INSERT INTO communities (community_name, community_summary, community_rules, community_image) VALUES ($1, $2, $3, $4) RETURNING *';
-    const values = [community_name, community_summary, community_rules, community_image];
+  static async create(community_name, community_summary, community_rules, community_image, community_leader) {
+    const query = 'INSERT INTO communities (community_name, community_summary, community_rules, community_image, community_leader) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+    const values = [community_name, community_summary, community_rules, community_image, community_leader];
 
     try {
       const { rows } = await db.query(query, values);
@@ -48,7 +49,7 @@ class Community {
 
   static async getAll() {
     const response = await db.query("SELECT * FROM communities;");
-    console.log(response)
+
     if (response.rows.length === 0) {
         throw new Error ("No communities available");
     }

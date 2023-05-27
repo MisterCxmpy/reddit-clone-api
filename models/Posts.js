@@ -1,10 +1,11 @@
 const db = require('../config/postgresdb.js');
 
 class Post {
-  constructor({ post_id, community, author, content, upvotes, downvotes, comments, user_id }) {
+  constructor({ post_id, community, author, title, content, upvotes, downvotes, comments, user_id }) {
     this.post_id = post_id;
     this.community = community;
     this.author = author;
+    this.title = title;
     this.content = content;
     this.upvotes = upvotes;
     this.downvotes = downvotes;
@@ -12,9 +13,9 @@ class Post {
     this.user_id = user_id;
   }
 
-  static async create(community, author, content, user_id) {
-    const query = 'INSERT INTO posts (community, author, content, user_id) VALUES ($1, $2, $3, $4) RETURNING *';
-    const values = [community, author, content, user_id];
+  static async create(community, author, title, content, user_id) {
+    const query = 'INSERT INTO posts (community, author, title, content, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+    const values = [community, author, title, content, user_id];
 
     try {
       const { rows } = await db.query(query, values);
@@ -61,6 +62,23 @@ class Post {
     } catch (error) {
       throw new Error('Error getting post: ' + error.message);
     }
+  }
+
+  static async getByCommunity(community) {
+    const query = 'SELECT * FROM posts WHERE community = $1';
+    const values = [community];
+
+    try {
+      const { rows } = await db.query(query, values);
+      if (rows.length === 0) {
+        throw new Error ("No posts available");
+      }
+      return rows.map((c) => new Post(c));
+    } catch (error) {
+      throw new Error('Error getting post: ' + error.message);
+    }
+
+  
   }
 }
 

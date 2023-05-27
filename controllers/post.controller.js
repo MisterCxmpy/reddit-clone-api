@@ -1,10 +1,10 @@
 const Posts = require('../models/Posts');
 
 module.exports.createPost = async (req, res, next) => {
-  const { community, author, content, user_id } = req.body;
+  const { community, author, title, content, user_id } = req.body;
 
   try {
-    const post = await Posts.create(community, author, content, user_id);
+    const post = await Posts.create(community, author, title, content, user_id);
     res.status(201).json({ post });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -40,6 +40,17 @@ module.exports.getPostById = async (req, res, next) => {
   try {
     const post = await Posts.getById(post_id);
     res.json({ post });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports.getPostByCommunity = async (req, res, next) => {
+  const { community } = req.params;
+
+  try {
+    const post = await Posts.getByCommunity(community);
+    res.json(post);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
