@@ -51,11 +51,9 @@ INSERT INTO
 VALUES
   (
     'Popular',
-    '"Popular" is a dynamic and diverse community that caters to a wide range of interests and discussions, making it a go-to destination for APP Name users seeking a glimpse into the most engaging and trending topics across various domains. With its extensive user base and active community, the community serves as a hub for sharing and exploring the latest news, viral content, thought-provoking discussions, and entertaining memes.
-
-The community''s front page showcases a curated selection of popular posts from a multitude of categories, including technology, science, current events, art, sports, gaming, music, movies, TV shows, and much more. Users can easily find content that aligns with their interests, engage in lively conversations, and discover fascinating perspectives from around the world.',
+    'The best posts on APP NAME for you, pulled from the most active communities on APP NAME. Check here to see the most shared, upvoted, and commented content on the internet.',
     '[''Behave like you would in real life'', ''Search for duplicates before posting'', ''Look for the original source of content'', ''Search for duplicates before posting'', ''Read the community''s rules'']',
-    'https://w0.peakpx.com/wallpaper/789/352/HD-wallpaper-sugar-pop-art-graffiti-stickers-colorful.jpg',
+    'https://e1.pxfuel.com/desktop-wallpaper/910/175/desktop-wallpaper-marvelous-funky-retro-for-backgrounds-in-animal-retro.jpg',
     'awesomegamer123',
     'true'
   )
