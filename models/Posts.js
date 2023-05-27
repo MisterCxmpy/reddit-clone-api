@@ -1,10 +1,11 @@
 const db = require('../config/postgresdb.js');
 
 class Post {
-  constructor({ post_id, community, author, title, content, upvotes, downvotes, comments, user_id }) {
+  constructor({ post_id, community, author, created_at, title, content, upvotes, downvotes, comments, user_id }) {
     this.post_id = post_id;
     this.community = community;
     this.author = author;
+    this.created_at = created_at;
     this.title = title;
     this.content = content;
     this.upvotes = upvotes;
@@ -16,6 +17,8 @@ class Post {
   static async create(community, author, title, content, user_id) {
     const query = 'INSERT INTO posts (community, author, title, content, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *';
     const values = [community, author, title, content, user_id];
+
+    console.log(values)
 
     try {
       const { rows } = await db.query(query, values);
