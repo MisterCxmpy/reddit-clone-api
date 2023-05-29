@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS posts CASCADE;
 DROP TABLE IF EXISTS communities CASCADE;
+DROP TABLE IF EXISTS votes CASCADE;
 
 CREATE TABLE users (
   user_id INT GENERATED ALWAYS AS IDENTITY,
@@ -10,6 +11,7 @@ CREATE TABLE users (
   created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   score INT DEFAULT 0,
   is_admin BOOLEAN DEFAULT FALSE,
+  likes TEXT DEFAULT('[]'),
   PRIMARY KEY (user_id)
 );
 
@@ -37,6 +39,16 @@ CREATE TABLE communities (
   community_leader VARCHAR(60) NOT NULL,
   is_default BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (community_id)
+);
+
+CREATE TABLE votes (
+  vote_id INT GENERATED ALWAYS AS IDENTITY,
+  user_id INT NOT NULL,
+  post_id INT NOT NULL,
+  vote_type VARCHAR(10) NOT NULL,
+  PRIMARY KEY (vote_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id),
+  FOREIGN KEY (post_id) REFERENCES posts(post_id)
 );
 
 INSERT INTO

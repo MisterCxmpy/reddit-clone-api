@@ -55,7 +55,7 @@ class Community {
     }
 
     return response.rows.map((c) => new Community(c));
-}
+  }
 
   static async getByCommunity(community) {
     const query = 'SELECT * FROM communities WHERE community_name = $1';

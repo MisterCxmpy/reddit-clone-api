@@ -23,6 +23,30 @@ module.exports.editPost = async (req, res, next) => {
   }
 };
 
+module.exports.editVote = async (req, res, next) => {
+  const { id } = req.params;
+  const { vote_type } = req.body;
+
+  try {
+    const post = await Posts.vote(id, vote_type);
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports.editPost = async (req, res, next) => {
+  const { post_id } = req.params;
+  const { vote_type } = req.body;
+
+  try {
+    const post = await Posts.vote(post_id, vote_type);
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports.deletePost = async (req, res, next) => {
   const { post_id } = req.params;
 
