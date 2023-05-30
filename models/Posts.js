@@ -55,11 +55,11 @@ class Post {
     let query;
 
     switch (vote_type) {
-      case "upvote":
+      case "upvotes":
         query =
           "UPDATE posts SET upvotes = upvotes + 1 WHERE post_id = $1 RETURNING *;";
         break;
-      case "downvote":
+      case "downvotes":
         query =
           "UPDATE posts SET downvotes = downvotes + 1 WHERE post_id = $1 RETURNING *;";
         break;
