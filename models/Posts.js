@@ -8,8 +8,7 @@ class Post {
     created_at,
     title,
     content,
-    upvotes,
-    downvotes,
+    votes,
     comments,
     user_id,
   }) {
@@ -19,8 +18,7 @@ class Post {
     this.created_at = created_at;
     this.title = title;
     this.content = content;
-    this.upvotes = upvotes;
-    this.downvotes = downvotes;
+    this.votes = votes;
     this.comments = comments;
     this.user_id = user_id;
   }
@@ -57,11 +55,11 @@ class Post {
     switch (vote_type) {
       case "upvotes":
         query =
-          "UPDATE posts SET upvotes = upvotes + 1 WHERE post_id = $1 RETURNING *;";
+          "UPDATE posts SET votes = votes + 1 WHERE post_id = $1 RETURNING *;";
         break;
       case "downvotes":
         query =
-          "UPDATE posts SET downvotes = downvotes + 1 WHERE post_id = $1 RETURNING *;";
+          "UPDATE posts SET votes = votes - 1 WHERE post_id = $1 RETURNING *;";
         break;
       default:
         break;

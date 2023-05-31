@@ -59,10 +59,10 @@ module.exports.deletePost = async (req, res, next) => {
 };
 
 module.exports.getPostById = async (req, res, next) => {
-  const { post_id } = req.params;
+  const { id } = req.params;
 
   try {
-    const post = await Posts.getById(post_id);
+    const post = await Posts.getById(id);
     res.json({ post });
   } catch (error) {
     res.status(500).json({ error: error.message });
