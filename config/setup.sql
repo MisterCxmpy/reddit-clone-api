@@ -61,7 +61,7 @@ INSERT INTO
   )
 VALUES
   (
-    'Popular',
+    'popular',
     'The best posts on APP NAME for you, pulled from the most active communities on APP NAME. Check here to see the most shared, upvoted, and commented content on the internet.',
     '[''Behave like you would in real life'', ''Search for duplicates before posting'', ''Look for the original source of content'', ''Search for duplicates before posting'', ''Read the community''s rules'']',
     'https://e1.pxfuel.com/desktop-wallpaper/910/175/desktop-wallpaper-marvelous-funky-retro-for-backgrounds-in-animal-retro.jpg',
