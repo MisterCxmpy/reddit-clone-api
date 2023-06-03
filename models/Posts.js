@@ -61,6 +61,14 @@ class Post {
         query =
           "UPDATE posts SET votes = votes - 1 WHERE post_id = $1 RETURNING *;";
         break;
+      case "remove_change":
+        query =
+          "UPDATE posts SET votes = votes - 2 WHERE post_id = $1 RETURNING *;";
+        break;
+      case "add_change":
+        query =
+          "UPDATE posts SET votes = votes + 2 WHERE post_id = $1 RETURNING *;";
+        break;
       default:
         break;
     }
