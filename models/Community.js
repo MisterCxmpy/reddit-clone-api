@@ -57,6 +57,16 @@ class Community {
     return response.rows.map((c) => new Community(c));
   }
 
+  static async getDefault() {
+    const response = await db.query("SELECT * FROM communities WHERE is_default = 'true';");
+
+    if (response.rows.length === 0) {
+        throw new Error ("No default communities available");
+    }
+
+    return response.rows.map((c) => new Community(c));
+  }
+
   static async getByCommunity(community) {
     const query = 'SELECT * FROM communities WHERE community_name = $1';
     const values = [community];

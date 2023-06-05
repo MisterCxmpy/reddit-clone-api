@@ -40,16 +40,6 @@ CREATE TABLE communities (
   PRIMARY KEY (community_id)
 );
 
--- CREATE TABLE votes (
---   vote_id INT GENERATED ALWAYS AS IDENTITY,
---   user_id INT NOT NULL,
---   post_id INT NOT NULL,
---   vote_type VARCHAR(10) NOT NULL,
---   PRIMARY KEY (vote_id),
---   FOREIGN KEY (user_id) REFERENCES users(user_id),
---   FOREIGN KEY (post_id) REFERENCES posts(post_id)
--- );
-
 INSERT INTO
   communities(
     community_name,

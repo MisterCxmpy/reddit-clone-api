@@ -25,8 +25,16 @@ module.exports.getCommunityByCommunity = async (req, res, next) => {
 module.exports.getAll = async (req, res, next) => {
   try {
     const community = await Community.getAll();
-    console.log(community)
     res.json({ community });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports.getDefault = async (req, res, next) => {
+  try {
+    const community = await Community.getDefault();
+    res.json(community);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
