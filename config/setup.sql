@@ -34,7 +34,7 @@ CREATE TABLE communities (
   community_id INT GENERATED ALWAYS AS IDENTITY,
   community_name VARCHAR(140) NOT NULL UNIQUE,
   community_summary TEXT NOT NULL,
-  community_rules TEXT NOT NULL,
+  community_rules TEXT,
   community_image TEXT NOT NULL,
   community_leader VARCHAR(60) NOT NULL,
   is_default BOOLEAN DEFAULT FALSE,
