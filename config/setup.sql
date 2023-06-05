@@ -12,6 +12,7 @@ CREATE TABLE users (
   score INT DEFAULT 0,
   is_admin BOOLEAN DEFAULT FALSE,
   votes JSON DEFAULT('[]'),
+  joined_communities JSON DEFAULT('[]'),
   PRIMARY KEY (user_id)
 );
 

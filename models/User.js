@@ -11,6 +11,7 @@ class User {
     score,
     votes,
     is_admin,
+    joined_communities,
   }) {
     this.user_id = user_id;
     this.email = email;
@@ -20,6 +21,7 @@ class User {
     this.score = score;
     this.votes = votes;
     this.is_admin = is_admin;
+    this.joined_communities = joined_communities;
   }
 
   static async create(data) {
