@@ -17,7 +17,6 @@ module.exports.setVote = async (req, res, next) => {
 
   try {
     const vote = await User.vote(id, post_id, post_name, vote_type);
-    console.log(vote)
     res.status(201).json(vote);
   } catch (error) {
     res.status(500).json({ error: error.message });

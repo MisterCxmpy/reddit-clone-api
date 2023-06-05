@@ -72,6 +72,23 @@ class User {
       throw new Error('Error creating vote: ' + error.message);
     }
   }
+
+  static async update(user_id, user) {
+    const { username, email, score, votes } = user;
+  
+    const votesJson = JSON.stringify(votes); // Convert votes array to JSON string
+  
+    const query = "UPDATE users SET username = $1, email = $2, score = $3, votes = $4 WHERE user_id = $5 RETURNING *;";
+    const values = [username, email, score, votesJson, user_id]; // Use the votesJson string in the values array
+  
+    try {
+      const { rows } = await db.query(query, values);
+      return new User(rows[0]);
+    } catch (error) {
+      throw new Error('Error updating user: ' + error.message);
+    }
+  }
+  
 }
 
 module.exports = User;
