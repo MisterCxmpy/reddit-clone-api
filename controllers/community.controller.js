@@ -39,3 +39,15 @@ module.exports.getDefault = async (req, res, next) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+module.exports.joinCommunity = async (req, res, next) => {
+  const { id } = req.params;
+  const { type } = req.body;
+
+  try {
+    const community = await Community.join(id, type);
+    res.json(community);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

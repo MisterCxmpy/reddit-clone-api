@@ -10,8 +10,8 @@ class User {
     created_at,
     score,
     votes,
-    is_admin,
     joined_communities,
+    is_admin,
   }) {
     this.user_id = user_id;
     this.email = email;
@@ -20,8 +20,8 @@ class User {
     this.created_at = created_at;
     this.score = score;
     this.votes = votes;
-    this.is_admin = is_admin;
     this.joined_communities = joined_communities;
+    this.is_admin = is_admin;
   }
 
   static async create(data) {
@@ -76,12 +76,13 @@ class User {
   }
 
   static async update(user_id, user) {
-    const { username, email, score, votes } = user;
-  
-    const votesJson = JSON.stringify(votes); // Convert votes array to JSON string
-  
-    const query = "UPDATE users SET username = $1, email = $2, score = $3, votes = $4 WHERE user_id = $5 RETURNING *;";
-    const values = [username, email, score, votesJson, user_id]; // Use the votesJson string in the values array
+    const { username, email, score, votes, joined_communities } = user;
+
+    const votesJson = JSON.stringify(votes);
+    const joinedJson = JSON.stringify(joined_communities);
+
+    const query = "UPDATE users SET username = $1, email = $2, score = $3, votes = $4, joined_communities = $5 WHERE user_id = $6 RETURNING *;";
+    const values = [username, email, score, votesJson, joinedJson, user_id]; // Use the votesJson string in the values array
   
     try {
       const { rows } = await db.query(query, values);
@@ -90,7 +91,6 @@ class User {
       throw new Error('Error updating user: ' + error.message);
     }
   }
-  
 }
 
 module.exports = User;

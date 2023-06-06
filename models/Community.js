@@ -1,13 +1,14 @@
 const db = require('../config/postgresdb.js');
 
 class Community {
-  constructor({ community_id, community_name, community_summary, community_rules, community_image, community_leader, is_default }) {
+  constructor({ community_id, community_name, community_summary, community_rules, community_image, community_leader, members, is_default }) {
     this.community_id = community_id;
     this.community_name = community_name;
     this.community_summary = community_summary;
     this.community_rules = community_rules;
     this.community_image = community_image;
     this.community_leader = community_leader;
+    this.members = members;
     this.is_default = is_default;
   }
 
@@ -79,6 +80,32 @@ class Community {
       return new Community(rows[0]);
     } catch (error) {
       throw new Error('Error getting post: ' + error.message);
+    }
+  }
+
+  static async join(community_id, type) {
+    let query;
+
+    switch (type) {
+      case "join":
+        query =
+          "UPDATE communities SET members = members + 1 WHERE community_id = $1 RETURNING *;";
+        break;
+      case "leave":
+        query =
+          "UPDATE communities SET members = members - 1 WHERE community_id = $1 RETURNING *;";
+        break;
+      default:
+        break;
+    }
+
+    const values = [community_id];
+
+    try {
+      const { rows } = await db.query(query, values);
+      return new Community(rows[0]);
+    } catch (error) {
+      throw new Error("Error editing community: " + error.message);
     }
   }
 }

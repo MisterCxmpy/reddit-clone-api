@@ -37,6 +37,7 @@ CREATE TABLE communities (
   community_rules TEXT,
   community_image TEXT NOT NULL,
   community_leader VARCHAR(60) NOT NULL,
+  members INT DEFAULT 0,
   is_default BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (community_id)
 );

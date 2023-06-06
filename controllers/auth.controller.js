@@ -32,6 +32,8 @@ module.exports.login = async (req, res) => {
 module.exports.update = async (req, res, next) => {
   const { id } = req.params;
 
+  console.log(req.body)
+
   try {
     const updated_user = await User.update(id, req.body);
     res.status(201).json(updated_user);
