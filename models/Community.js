@@ -83,6 +83,23 @@ class Community {
     }
   }
 
+  static async getCommunitiesFromUser(user_id) {
+    console.log(user_id)
+
+    const query = `SELECT c.* FROM communities c JOIN users u ON u.joined_communities::jsonb @> jsonb_build_array(jsonb_build_object('id', c.community_id)) WHERE u.user_id = $1;`;
+    const values = [user_id];
+
+    try {
+      const { rows } = await db.query(query, values);
+      if (rows[0] === 0) {
+        throw new Error('User has no joined communities');
+      }
+      return new Community(rows[0]);
+    } catch (error) {
+      throw new Error('Error getting post: ' + error.message);
+    }
+  }
+
   static async join(community_id, type) {
     let query;
 

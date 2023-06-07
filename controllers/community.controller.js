@@ -22,6 +22,17 @@ module.exports.getCommunityByCommunity = async (req, res, next) => {
   }
 };
 
+module.exports.getCommunitiesFromUser = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const communities = await Community.getCommunitiesFromUser(id);
+    res.json([communities]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports.getAll = async (req, res, next) => {
   try {
     const community = await Community.getAll();
